@@ -2,7 +2,7 @@ DEFAULT_HOST!=../default-host.sh
 HOST?=DEFAULT_HOST
 HOSTARCH!=../target-triplet-to-arch.sh $(HOST)
  
-CFLAGS?=-O2 -g
+CFLAGS?=-O2 -g -Wdeclaration-missing-parameter-type
 CPPFLAGS?=
 LDFLAGS?=
 LIBS?=
@@ -18,8 +18,9 @@ CPPFLAGS:=$(CPPFLAGS) -D__is_libc -Iinclude
 LIBK_CFLAGS:=$(CFLAGS)
 LIBK_CPPFLAGS:=$(CPPFLAGS) -D__is_libk
  
-ARCHDIR=arch/$(HOSTARCH)
- 
+#ARCHDIR=arch/$(HOSTARCH)
+ARCHDIR=arch/i386
+
 include $(ARCHDIR)/make.config
  
 CFLAGS:=$(CFLAGS) $(ARCH_CFLAGS)
@@ -83,7 +84,8 @@ install: install-headers install-libs
  
 install-headers:
 	mkdir -p $(DESTDIR)$(INCLUDEDIR)
-	cp -R --preserve=timestamps include/. $(DESTDIR)$(INCLUDEDIR)/.
+#	cp -R --preserve=timestamps include/. $(DESTDIR)$(INCLUDEDIR)/.
+	cp -R include/. $(DESTDIR)$(INCLUDEDIR)/.
  
 install-libs: $(BINARIES)
 	mkdir -p $(DESTDIR)$(LIBDIR)

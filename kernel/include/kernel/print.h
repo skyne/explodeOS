@@ -6,5 +6,6 @@
 
 #include <stddef.h>
 
-void print(const char* data); // print("Hi%c", exclamation);
+void print(const char *data); // print("Hi%c", exclamation);
 void printc(char c);
+int printf(const char *__restrict, ...);
